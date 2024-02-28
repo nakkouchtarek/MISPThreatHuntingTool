@@ -1,0 +1,5 @@
+google-generativeai
+python-dotenv
+pymisp
+selenium
+dnstwist[full]

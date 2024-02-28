@@ -11,7 +11,7 @@ requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 class MISPClient:
 	def __init__(self, logger):
 		load_dotenv()
-		self.misp_url = 'https://172.27.126.81'
+		self.misp_url = 'misp_address'
 		self.misp_key = os.getenv('MISP')
 		self.logger = logger
 		self.misp = PyMISP(self.misp_url, self.misp_key, False)

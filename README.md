@@ -1,6 +1,6 @@
 # MISPThreatHuntingTool
 
-Threat hunting tool for Darkweb crawling to find keywords, detect phishing domains and scan files for keywords and stolen credit cards.
+Threat hunting tool for Darkweb crawling to find keywords, detect phishing domains and scan files for keywords and credit card fraud.
 
 ![Capture](https://github.com/nakkouchtarek/MISPThreatHuntingTool/assets/98561646/0256d0d9-9ccc-485f-90df-448348db13d0)
 

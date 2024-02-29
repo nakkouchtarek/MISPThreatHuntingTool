@@ -28,7 +28,7 @@ class DetectorFramework:
         self.queue = Queue()
 
         self.blacklist_urls = [elem.strip() for elem in open("core/blacklist_urls").readlines()[0].split(" ")][:-1]
-        self.bins = [elem.split(",")[2] for elem in open("core/bins").readlines()]
+        self.bins = [elem.strip() for elem in open("core/bins").readlines()]
         self.urls = []
 
         self.threads = []

@@ -8,9 +8,9 @@ Threat hunting tool for Darkweb crawling to find keywords, detect phishing domai
 
 You will be needing Firefox, MISP, Tor and python already installed. Now you gotta install the required python packages
 
-'''
+```
 pip install -r requirements.txt
-'''
+```
 
 You will also be needing a Gemini API key to integrate with this, as you will fill in your Gemini API key and MISP API key in the .env file.
 

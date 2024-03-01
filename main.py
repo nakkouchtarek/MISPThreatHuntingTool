@@ -28,7 +28,6 @@ class DetectorFramework:
         self.queue = Queue()
 
         self.blacklist_urls = [elem.strip() for elem in open("core/blacklist_urls").readlines()[0].split(" ")][:-1]
-        self.bins = [elem.strip() for elem in open("core/bins").readlines()]
         self.urls = []
 
         self.threads = []
@@ -111,24 +110,6 @@ class DetectorFramework:
                     'galaxy':'placeholder_galaxy'
                 }
 
-                self.misp_client.add_event(misp_json)
-
-        for _bin in self.bins:
-            if _bin in source or _bin in title:
-                self.logger.success(f"Program has encountered a concerning BIN {_bin} at {url}")
-                
-                misp_json = {
-                    'url': url,
-                    'info':f'Credit Card Fraud : {_bin} found at {url}',
-                    'date':datetime.now().ctime(),
-                    'threat_level_id': 1,
-                    'attribute': _bin,
-                    'comment':f"Description : Encountered a bin while browsing {url} : _bin, risk of credit card fraud.",
-                    'tags':["creditcardfraud"],
-                    'galaxy':'placeholder_galaxy'
-                }
-
-                # Send event
                 self.misp_client.add_event(misp_json)
 
     def add_to_urls(self, line_number, new_lines):
@@ -228,35 +209,6 @@ class DetectorFramework:
 
         self.logger.success("Extracted all suspected keywords from file! Exiting now...")
 
-    def check_bin(self):
-        lines = []
-        tags = set()
-
-        with open(self.url_list) as f:
-            for i,line in enumerate(f.readlines()):
-                for _bin in self.bins:
-                    if _bin in line:
-                        lines.append(f"{i} -> {line}")
-                        self.logger.success(f"Program has encountered a concerning BIN {_bin} at line {i} : {line.strip()}")
-                        tags.add("creditcardfraud")
-        
-        new = '\n'.join(lines)
-
-        if tags:
-            misp_json = {
-                'url': self.url_list,
-                'info':f'Credit Card Fraud : Found {len(lines)} leaked cards',
-                'date':datetime.now().ctime(),
-                'threat_level_id': 1,
-                'attribute': self.url_list,
-                'comment':f"Description : Encountered concerning info at specific lines in file:\n{new}",
-                'tags':tags,
-                'galaxy':'placeholder_galaxy'
-            }
-
-            self.misp_client.add_event(misp_json)
-        self.logger.success("Extracted all suspected CC's from file! Exiting now...")
-
     def dns_phishing_search(self):
         self.logger.info("Started fuzzing for phishing domains")
         c = whoisfetcher.WHOisFetcher()
@@ -310,7 +262,7 @@ if __name__ == "__main__":
     print(pyfiglet.figlet_format("Threat Intelligence Tool"))
 
     if len(sys.argv) < 3:
-        print("Invalid usage: python main.py [darkweb|filechecker|binchecker|phishing] [url_list]")
+        print("Invalid usage: python main.py [darkweb|filechecker|phishing] [url_list]")
         exit(-1)
 
     handler = DetectorFramework(Logger("handler.log"), sys.argv[2])
@@ -321,8 +273,6 @@ if __name__ == "__main__":
         handler.file_check()
     elif sys.argv[1] == "phishing":
         handler.dns_phishing_search()
-    elif sys.argv[1] == "binchecker":
-        handler.check_bin()
     else:
-        print("Invalid usage: python main.py [darkweb|filechecker|binchecker|phishing] [url_list]")
+        print("Invalid usage: python main.py [darkweb|filechecker|phishing] [url_list]")
         exit(-1)

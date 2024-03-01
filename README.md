@@ -1,6 +1,6 @@
 # MISPThreatHuntingTool
 
-Threat hunting tool for Darkweb crawling to find keywords, detect phishing domains and scan files for keywords and credit card fraud.
+Threat hunting tool for Darkweb crawling to find keywords, detect phishing domains and scan files for keywords.
 
 ![Capture](https://github.com/nakkouchtarek/MISPThreatHuntingTool/assets/98561646/0256d0d9-9ccc-485f-90df-448348db13d0)
 
@@ -59,14 +59,6 @@ This will check for blacklisted words inside your file and send events towards M
 
 ```
 python main.py filechecker file.txt
-```
-
-## Bin Checker
-
-You can check for stolen credit cards from your organization through BIN number, fill the bin file in core folder with the bins you want to check and run : 
-
-```
-python main.py binchecker file.txt
 ```
 
 

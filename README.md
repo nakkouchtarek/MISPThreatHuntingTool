@@ -2,7 +2,7 @@
 
 Threat hunting tool for Darkweb crawling to find keywords, detect phishing domains and scan files for keywords.
 
-![Capture](https://github.com/nakkouchtarek/MISPThreatHuntingTool/assets/98561646/0256d0d9-9ccc-485f-90df-448348db13d0)
+![image](https://github.com/nakkouchtarek/MISPThreatHuntingTool/assets/98561646/12773443-d619-4e5f-a40f-21e36a94b30d)
 
 # Install
 
@@ -19,7 +19,6 @@ You will also be needing a Gemini API key to integrate with this, as you will fi
 In core you will find certain files : 
 
 - blacklist : list of blacklisted words you want to look for when searching with all operations except for binchecker
-- bin : list of bin numbers you want to look for when scanning files to detect credit card fraud
 - progress : tracks the progress of your darkweb crawling, can reset it by setting the value of COUNT to 0
 - blacklist_urls : list of urls that ahmia specified as containing abuse material which we will avoid, so we filter them out when crawling
 - tlds_dict : list of top level domains to use when looking for possible phishing domains
